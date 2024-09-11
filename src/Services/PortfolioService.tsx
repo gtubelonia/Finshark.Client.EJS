@@ -1,5 +1,5 @@
 import { handleError } from "../Helpers/ErrorHandler";
-import { PortfolioGet, PortfolioPost } from "../Models/portfolio";
+import { PortfolioSectorGet, PortfolioPost } from "../Models/portfolio";
 import axiosInstance from "../Helpers/axiosHelper";
 const api = `${import.meta.env.VITE_APP_API_URL}/portfolios/`;
 
@@ -25,7 +25,7 @@ export const portfolioDeleteAPI = async (symbol: string) => {
 
 export const portfolioGetAPI = async () => {
     try {
-        const data = await axiosInstance.get<PortfolioGet[]>(api);
+        const data = await axiosInstance.get<PortfolioSectorGet>(api);
         return data;
     } catch (error) {
         handleError(error);

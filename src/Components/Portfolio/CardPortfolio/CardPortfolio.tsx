@@ -10,12 +10,15 @@ type Props = {
 
 const CardPortfolio = ({ portfolioValue, onPortfolioDelete }: Props) => {
     return (
-        <div className="p-8 space-y-4 text-center rounded-lg shadow-lg md:w-1/2">
-            <Link to={`/company/${portfolioValue.symbol}/company-profile`} className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
+        <div className="justify-self-center pt-8 p-2 m-2 text-small rounded-lg shadow-lg h-44 w-52">
+            <Link to={`/company/${portfolioValue.symbol}/company-profile`} 
+            className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-1 px-2 border-b-4 border-blue-700 hover:border-blue-500 rounded">
                 {portfolioValue.symbol}
             </Link>
-            <p>Price: ${portfolioValue.purchase}</p>
-            <p>Industry: {portfolioValue.industry}</p>
+            <div className="text-xs my-3">
+                <p >Price: ${portfolioValue.purchase}</p>
+                <p >Industry: {portfolioValue.industry}</p>
+            </div>
             <DeletePortfolio
                 portfolioValue={portfolioValue.symbol}
                 onPortfolioDelete={onPortfolioDelete}
