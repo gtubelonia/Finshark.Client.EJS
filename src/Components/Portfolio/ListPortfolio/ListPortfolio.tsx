@@ -1,13 +1,13 @@
 import React, { SyntheticEvent } from 'react'
 import CardPortfolio from '../CardPortfolio/CardPortfolio';
-import { PortfolioGet } from '../../../Models/portfolio';
+import { PortfolioSectorGet } from '../../../Models/portfolio';
 
 type Props = {
-    portfolioValues: PortfolioGet[];
+    portfolioList: PortfolioSectorGet | null;
     onPortfolioDelete: (e: SyntheticEvent) => void;
 }
 
-const ListPortfolio = ({ portfolioValues, onPortfolioDelete }: Props) => {
+const ListPortfolio = ({ portfolioList, onPortfolioDelete }: Props) => {
     return (
         <section id="portfolio">
             <h2 className="mb-3 mt-3 text-3xl font-semibold text-center md:text-4xl">
@@ -15,14 +15,21 @@ const ListPortfolio = ({ portfolioValues, onPortfolioDelete }: Props) => {
             </h2>
             <div className="grid grid-cols-2 px-10 mb-5 md:px-6 md:flex-row">
                 <>
-                    {portfolioValues.length > 0 ? (
-                        portfolioValues.map((portfolioValue) => {
+                    {portfolioList ? (
+                        Object.keys(portfolioList).map((keyName) => {
                             return (
-                                <CardPortfolio
-                                    key={portfolioValue.id}
-                                    portfolioValue={portfolioValue}
-                                    onPortfolioDelete={onPortfolioDelete}
-                                />
+                                <div>
+                                    <h4>{keyName}</h4>
+                                    <div className="grid justify-center items-top">
+                                        {portfolioList[keyName].map((stock) => {
+                                            return <CardPortfolio
+                                                key={stock.id}
+                                                portfolioValue={stock}
+                                                onPortfolioDelete={onPortfolioDelete}
+                                            />
+                                        })}
+                                    </div>
+                                </div>
                             );
                         })
                     ) : (

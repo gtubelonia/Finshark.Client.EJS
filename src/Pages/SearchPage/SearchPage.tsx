@@ -4,7 +4,7 @@ import { CompanySearch } from '../../company.d';
 import CardList from '../../Components/CardList/CardList';
 import ListPortfolio from '../../Components/Portfolio/ListPortfolio/ListPortfolio';
 import SearchBar from '../../Components/SearchBar/SearchBar';
-import { PortfolioGet } from '../../Models/portfolio';
+import { PortfolioSectorGet } from '../../Models/portfolio';
 import { toast } from 'react-toastify';
 import { portfolioAddAPI, portfolioDeleteAPI, portfolioGetAPI } from '../../Services/PortfolioService';
 
@@ -15,7 +15,7 @@ const SearchPage = (props: Props) => {
     const [searchBarValue, setSearchBarValue] = useState<string>("");
     const [searchResult, setSearchResult] = useState<CompanySearch[]>([]);
     const [serverError, setServerError] = useState<string | null>(null);
-    const [portfolioValues, setPortfolioValues] = useState<PortfolioGet[]>([]);
+    const [portfolioValues, setPortfolioValues] = useState<PortfolioSectorGet|null>(null);
 
     const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
         setSearchBarValue(e.target.value);
@@ -43,11 +43,11 @@ const SearchPage = (props: Props) => {
                 if (res?.data) {
                     setPortfolioValues(res?.data);
                 } else {
-                    setPortfolioValues([]);
+                    setPortfolioValues(null);
                 }
             }).catch((e) => {
                 toast.warning("Could not get portfolio values!");
-                setPortfolioValues([]);
+                setPortfolioValues(null);
             })
     }
 
@@ -91,7 +91,7 @@ const SearchPage = (props: Props) => {
                     />
                 </div>
                 <div>
-                    <ListPortfolio portfolioValues={portfolioValues} onPortfolioDelete={onPortfolioDelete} />
+                    <ListPortfolio portfolioList={portfolioValues} onPortfolioDelete={onPortfolioDelete} />
                 </div>
             </div>
         </>
