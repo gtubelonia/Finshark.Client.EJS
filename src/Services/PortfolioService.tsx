@@ -5,7 +5,7 @@ const api = `${import.meta.env.VITE_APP_API_URL}/portfolios/`;
 
 export const portfolioAddAPI = async (symbol: string) => {
     try {
-        const data = await axiosInstance.patch<PortfolioPost>(api + `add?symbol=${symbol}`, {
+        const data = await axiosInstance.patch<PortfolioPost>(api + `add/${symbol}`, {
         });
         return data;
     } catch (error) {
@@ -15,7 +15,7 @@ export const portfolioAddAPI = async (symbol: string) => {
 
 export const portfolioDeleteAPI = async (symbol: string) => {
     try {
-        const data = await axiosInstance.patch<PortfolioPost>(api + `delete?symbol=${symbol}`, {
+        const data = await axiosInstance.patch<PortfolioPost>(api + `delete/${symbol}`, {
         });
         return data;
     } catch (error) {

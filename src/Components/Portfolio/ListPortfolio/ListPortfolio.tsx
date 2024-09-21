@@ -18,7 +18,7 @@ const ListPortfolio = ({ portfolioList, onPortfolioDelete }: Props) => {
                     {portfolioList ? (
                         Object.keys(portfolioList).map((keyName) => {
                             return (
-                                <div>
+                                <div key = {keyName}>
                                     <h4>{keyName}</h4>
                                     <div className="grid justify-center items-top">
                                         {portfolioList[keyName].map((stock) => {
