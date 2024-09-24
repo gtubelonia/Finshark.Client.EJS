@@ -1,12 +1,12 @@
 import { handleError } from "../Helpers/ErrorHandler";
 import { CommentGet, CommentPost } from "../Models/Comment";
-import axios from "axios";
+import axiosInstance from "../Helpers/axiosHelper";
 
-const api = `${import.meta.env.VITE_APP_API_URL}/comment/`;
+const api = `${import.meta.env.VITE_APP_API_URL}/comments/`;
 
 export const commentPostAPI = async (title: string, content: string, symbol: string) => {
     try {
-        const data = await axios.post<CommentPost>(api + `${symbol}`, {
+        const data = await axiosInstance.post<CommentPost>(api + `add/${symbol}`, {
             title: title,
             content: content,
         });
@@ -18,7 +18,7 @@ export const commentPostAPI = async (title: string, content: string, symbol: str
 
 export const commentGetAPI = async (symbol: string) => {
     try {
-        const data = await axios.get<CommentGet[]>(api + `?Symbol=${symbol}`);
+        const data = await axiosInstance.get<CommentGet[]>(api + `${symbol}`);
         return data;
     } catch (error) {
         handleError(error);

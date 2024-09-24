@@ -6,6 +6,9 @@ export type CommentPost = {
 export type CommentGet = {
     title: string;
     content: string;
-    createdBy: string;
+    createdBy: {
+        username: string,
+        email: string,
+    };
     createdOn: string;
 };
